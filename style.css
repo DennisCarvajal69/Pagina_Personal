@@ -1,0 +1,386 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+/* ---------- Variables ---------- */
+:root {
+  --principal: #d6336c;   /* rosa */
+  --acento: #b197fc;      /* lila */
+  --oscuro: #15121c;      /* negro */
+  --fondo: #f6f1ff;
+  --caja: #ffffff;
+  --texto: #1a1625;
+  --texto-suave: #6b6480;
+  --borde: #e4daf7;
+}
+
+/* Ejemplo 1: el JS agrega esta clase al body */
+body.dark-mode {
+  --oscuro: #07050b;
+  --fondo: #0d0b12;
+  --caja: #18141f;
+  --texto: #f1ecfa;
+  --texto-suave: #a79fba;
+  --borde: #2f2740;
+}
+
+/* ---------- General ---------- */
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: "Inter", "Segoe UI", system-ui, -apple-system, Arial, sans-serif;
+  background-color: var(--fondo);
+  color: var(--texto);
+  line-height: 1.7;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+main.container { max-width: 960px; padding-top: 16px; }
+
+h1, h2, h3 {
+  color: var(--texto);
+  font-weight: 700;
+  letter-spacing: -0.01em;
+}
+
+h2 { font-size: 1.5rem; margin-bottom: 22px; }
+
+h2::after {
+  content: "";
+  display: block;
+  width: 40px;
+  height: 3px;
+  margin-top: 8px;
+  border-radius: 2px;
+  background-color: var(--acento);
+}
+
+h3 { font-size: 1.1rem; margin: 18px 0 8px; }
+
+.text-muted { color: var(--texto-suave) !important; }
+
+/* ---------- Encabezado con carrusel de fondo ---------- */
+header {
+  position: relative;
+  overflow: hidden;
+  background-color: var(--oscuro);
+  color: white;
+  border-top: 4px solid var(--principal);
+  padding: 20px 20px 48px;
+}
+
+/* Capa 1: el carrusel ocupa todo el encabezado */
+.fondo-carrusel {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+
+.fondo-carrusel .carousel-inner,
+.fondo-carrusel .carousel-item {
+  height: 100%;
+}
+
+/* Fondo desenfocado: rellena los lados con la misma foto */
+.fondo-carrusel .carousel-item {
+  background-size: cover;
+  background-position: center;
+}
+
+.fondo-carrusel .carousel-item::before {
+  content: "";
+  position: absolute;
+  inset: -30px;
+  background: inherit;
+  filter: blur(25px);
+}
+
+/* La foto completa, sin recortar */
+.fondo-carrusel .carousel-item img {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+/* Capa 2: sombra oscura (sube o baja los 0.35 y 0.55 para más o menos fondo) */
+.capa-oscura {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  background: linear-gradient(rgba(21, 18, 28, 0.35), rgba(21, 18, 28, 0.55));
+}
+
+/* Capa 3: el contenido va encima de todo */
+.contenido-header {
+  position: relative;
+  z-index: 2;
+}
+
+header h1 { font-size: 2.2rem; margin: 0; color: white; }
+
+header p { color: rgba(255, 255, 255, 0.85); margin: 4px 0 0; }
+
+/* Sombra en el texto para que se lea sobre cualquier foto */
+.contenido-header h1,
+.contenido-header p,
+.nav-menu a {
+  text-shadow: 0 2px 6px rgba(0, 0, 0, 0.7);
+}
+
+.foto-perfil {
+  width: 140px;
+  height: 140px;
+  object-fit: cover;
+  border-radius: 50%;
+  border: 3px solid white;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.4);
+  margin: 10px 0 16px;
+}
+
+.barra-top {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+
+.btn-header {
+  background: rgba(0, 0, 0, 0.3);
+  color: white;
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  padding: 7px 14px;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.btn-header:hover {
+  background: var(--principal);
+  border-color: var(--principal);
+}
+
+/* ---------- Ejemplo 3: menú oculto, lo despliega el JS con .show ---------- */
+.nav-menu {
+  display: none;
+  flex-direction: column;
+  gap: 2px;
+  margin-top: 20px;
+}
+
+.nav-menu.show { display: flex; }
+
+.nav-menu a {
+  color: rgba(255, 255, 255, 0.9);
+  text-decoration: none;
+  font-weight: 500;
+  font-size: 0.95rem;
+  padding: 8px 12px;
+  border-radius: 8px;
+  transition: 0.2s;
+}
+
+.nav-menu a:hover {
+  color: white;
+  background-color: rgba(255, 255, 255, 0.2);
+}
+
+/* Mobile First: en pantalla grande el menú se ve siempre */
+@media (min-width: 768px) {
+  .nav-menu {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  #burguerBtn { visibility: hidden; }
+}
+
+/* ---------- Cajas y tarjetas ---------- */
+.caja {
+  background-color: var(--caja);
+  border: 1px solid var(--borde);
+  border-radius: 12px;
+  padding: 32px;
+  margin-bottom: 28px;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
+  transition: background-color 0.3s;
+}
+
+.card {
+  background-color: var(--caja);
+  color: var(--texto);
+  border: 1px solid var(--borde);
+  border-radius: 12px;
+}
+
+.card h2 { font-size: 1.25rem; }
+.card h3 { margin-top: 0; }
+.card p:last-child { margin-bottom: 0; }
+
+/* ---------- Ejemplo 2: tarjetas de juegos ---------- */
+#juegos .card { margin-top: 12px; }
+#juegos .card p { margin-bottom: 10px; }
+
+/* ---------- Tablas ---------- */
+.table {
+  --bs-table-bg: transparent;
+  --bs-table-color: var(--texto);
+  --bs-table-border-color: var(--borde);
+  --bs-table-striped-color: var(--texto);
+  --bs-table-striped-bg: rgba(128, 128, 128, 0.07);
+  margin-bottom: 0;
+}
+
+.table-dark {
+  --bs-table-bg: var(--fondo);
+  --bs-table-color: var(--texto-suave);
+  --bs-table-border-color: var(--borde);
+}
+
+.table th { font-weight: 600; }
+.table th, .table td { padding: 12px 14px; }
+
+.badge { font-weight: 500; padding: 0.45em 0.8em; }
+
+/* ---------- Barras de nivel ---------- */
+.progress {
+  height: 1.1rem;
+  font-size: 0.7rem;
+  background-color: var(--borde);
+  border-radius: 99px;
+}
+
+.progress-bar { background-color: var(--principal) !important; }
+
+/* ---------- Iframe (horario) ---------- */
+iframe { border: 1px solid var(--borde); border-radius: 10px; }
+
+/* ---------- Botones de filtro y envío ---------- */
+.btn-filtro {
+  background: transparent;
+  color: var(--texto);
+  border: 1px solid var(--borde);
+  padding: 7px 16px;
+  margin-right: 5px;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.btn-filtro:hover {
+  background: var(--principal);
+  border-color: var(--principal);
+  color: white;
+}
+
+/* ---------- Frase ---------- */
+.frase-grafica {
+  background-color: var(--oscuro);
+  color: white;
+  padding: 56px 32px;
+  border-radius: 12px;
+  transition: background-color 0.3s;
+}
+
+.frase-grafica p {
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 1.75rem;
+  font-style: italic;
+  line-height: 1.4;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.frase-grafica p::before {
+  content: "“";
+  display: block;
+  font-size: 4.5rem;
+  line-height: 0.6;
+  color: var(--acento);
+}
+
+/* ---------- Ejemplo 4: formulario y mensajes ---------- */
+.form-control {
+  background-color: var(--caja);
+  color: var(--texto);
+  border: 1px solid var(--borde);
+  border-radius: 8px;
+  padding: 10px 14px;
+}
+
+.form-control:focus {
+  background-color: var(--caja);
+  color: var(--texto);
+  border-color: var(--principal);
+  box-shadow: 0 0 0 3px rgba(214, 51, 108, 0.2);
+}
+
+.form-control::placeholder { color: var(--texto-suave); }
+
+.msg-error { color: #dc2626; font-weight: bold; margin: 0; }
+.msg-exito { color: #16a34a; font-weight: bold; margin: 0; }
+
+/* ---------- Pie de página ---------- */
+footer {
+  background-color: var(--oscuro);
+  border-top: 3px solid var(--principal);
+  color: white;
+  padding: 32px 20px;
+  margin-top: 20px;
+  transition: background-color 0.3s;
+}
+
+footer p { margin: 0 0 8px; opacity: 0.85; }
+
+footer a {
+  color: white;
+  text-decoration: none;
+  margin: 0 12px;
+  font-weight: 500;
+  opacity: 0.9;
+}
+
+footer a:hover { opacity: 1; text-decoration: underline; }
+
+/* ---------- Música: fotos de bandas y tarjetas de canciones ---------- */
+.foto-banda {
+  width: 56px;
+  height: 56px;
+  object-fit: cover;
+  border-radius: 50%;
+  border: 2px solid var(--borde);
+}
+
+.table a {
+  color: var(--principal);
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.table a:hover { text-decoration: underline; }
+
+.cancion {
+  color: inherit;
+  text-decoration: none;
+  overflow: hidden;
+  transition: transform 0.2s, border-color 0.2s;
+}
+
+.cancion:hover {
+  transform: translateY(-4px);
+  border-color: var(--principal);
+}
+
+.cancion img {
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+}
+
+.cancion h4 {
+  font-size: 1rem;
+  font-weight: 700;
+  margin: 0 0 4px;
+  color: var(--texto);
+}

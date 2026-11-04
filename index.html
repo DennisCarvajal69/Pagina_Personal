@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Im - Mi página personal</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <script src="script.js" defer></script>
+</head>
+
+<body>
+
+  <!-- ENCABEZADO con carrusel de fondo -->
+  <header id="inicio" class="text-center">
+
+    <!-- Fondo: carrusel de fotos (cada foto va dos veces: fondo desenfocado + foto completa) -->
+    <div id="miCarrusel" class="carousel slide carousel-fade fondo-carrusel" data-bs-ride="carousel" data-bs-pause="false">
+      <div class="carousel-inner">
+        <div class="carousel-item active" style="background-image: url('img/foto1.png')">
+          <img src="img/foto1.png" alt="">
+        </div>
+        <div class="carousel-item" style="background-image: url('img/foto2.png')">
+          <img src="img/foto2.png" alt="">
+        </div>
+        <div class="carousel-item" style="background-image: url('img/foto3.png')">
+          <img src="img/foto3.png" alt="">
+        </div>
+      </div>
+    </div>
+
+    <!-- Capa oscura para que se lea el texto -->
+    <div class="capa-oscura"></div>
+
+    <!-- Contenido que va encima -->
+    <div class="contenido-header">
+      <div class="barra-top">
+        <button id="burguerBtn" class="btn-header">☰ Menú</button>
+        <button id="themeBtn" class="btn-header">🌙 Cambiar modo</button>
+      </div>
+
+      <img class="foto-perfil" src="img/fotoperfil.png" alt="Foto de Denilson">
+      <h1>Denilson Marcelo Carvajal Rojas</h1>
+      <p>Estudiante de Ingenieria de Sistemas</p>
+
+      <nav id="navMenu" class="nav-menu">
+        <a href="#sobre-mi">Sobre mí</a>
+        <a href="#gustos">Gustos</a>
+        <a href="#proyectos">Proyectos</a>
+        <a href="#horario">Horario</a>
+        <a href="#musica">Música</a>
+        <a href="#juegos">Juegos</a>
+        <a href="#contacto">Contacto</a>
+      </nav>
+    </div>
+
+  </header>
+
+  <main class="container my-4">
+
+    <!-- SOBRE MÍ -->
+    <section id="sobre-mi" class="caja">
+      <h2>Sobre mí</h2>
+      <p>
+        Soy estudiante de la carrera de Ingenieria de Sistemas. Me gusta el desarrollo web,
+        las bases de datos y la creacion de aplicaciones moviles. Me considero una persona curiosa, responsable y con muchas ganas de aprender.
+      </p>
+      <table class="table table-bordered">
+        <tr><th>Nombre</th><td>Denilson Marcelo Carvajal Rojas</td></tr>
+        <tr><th>Estudio</th><td>Ingeniera de Sistemas</td></tr>
+        <tr><th>Oficio</th><td>Actualmente no me encuentro trabajando en alguna empresa de Desarrollo web, pero si me sale alguno que otro laburo. :D</td></tr>
+        <tr><th>Ciudad</th><td>La Paz, Bolivia</td></tr>
+        <tr><th>Cumpleaños</th><td>27 de enero</td></tr>
+      </table>
+    </section>
+
+    <!-- PASATIEMPOS E INTERESES -->
+    <section id="gustos" class="row mb-4">
+      <div class="col-md-6 mb-3 mb-md-0">
+        <div class="card h-100">
+          <div class="card-body">
+            <h2>Pasatiempos</h2>
+            <p class="text-muted">No productivo.</p>
+            <ul>
+              <li>Ver series y anime</li>
+              <li>Salir con amigos</li>
+              <li>Caminar sin rumbo</li>
+              <li>Dormir siestas</li>
+              <li>Ver videos en YouTube</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="card h-100">
+          <div class="card-body">
+            <h2>Intereses</h2>
+            <p class="text-muted">Productivo.</p>
+            <ul>
+              <li>Desarrollo web</li>
+              <li>Ir al Gym</li>
+              <li>Bases de datos</li>
+              <li>Aprender Ingles</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PROYECTOS -->
+    <section id="proyectos" class="caja">
+      <h2>Mis proyectos</h2>
+      <div class="row">
+        <div class="col-md-4 mb-3">
+          <div class="card h-100"><div class="card-body">
+            <h3>Registro de estudiantes</h3>
+            <p>Sistema completo con PHP, MySQL y Bootstrap, hecho con XAMPP.</p>
+          </div></div>
+        </div>
+        <div class="col-md-4 mb-3">
+          <div class="card h-100"><div class="card-body">
+            <h3>Ventas de pasteleria</h3>
+            <p>Sistema con ASP.NET MVC, Entity Framework y MySQL.</p>
+          </div></div>
+        </div>
+        <div class="col-md-4 mb-3">
+          <div class="card h-100"><div class="card-body">
+            <h3>Proyecto Personal</h3>
+            <p>Proyecto de desarrollo web personal. (El actual)</p>
+          </div></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- HORARIO -->
+    <section id="horario" class="caja">
+      <h2>Mi horario</h2>
+      <p class="text-muted">Mis horarios hecho en Google Sheets.</p>
+      <iframe src="https://docs.google.com/spreadsheets/d/e/2PACX-1vTaqLlB1NpE_YdMDZ7DyEdwpnyHJO0pag1XnDGEBgo_J5tzFg8pbv8-CFLFfmCkD0aJLAYIVqzSfFNL/pubhtml?gid=0&amp;single=true&amp;widget=true&amp;headers=false" width="100%" height="350"></iframe>
+    </section>
+
+        <!-- MÚSICA -->
+    <section id="musica" class="caja">
+      <h2>Mi música favorita</h2>
+
+      <h3>Bandas</h3>
+      <div class="table-responsive">
+        <table class="table table-striped table-bordered align-middle">
+          <thead class="table-dark">
+            <tr><th>Foto</th><th>Banda</th><th>Género</th><th>Nivel de fan</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><img src="img/Pantera_TikTok.jpg" class="foto-banda" alt="Foto de Tu banda 1"></td>
+              <td><a href="https://www.youtube.com/channel/UChTDORxN3YPmasEurM6kRoA" target="_blank" rel="noopener">Pantera</a></td>
+              <td>Rock</td>
+              <td><span class="badge bg-success">Fan total</span></td>
+            </tr>
+            <tr>
+              <td><img src="img/Metallicajpg.jpg" class="foto-banda" alt="Foto de Tu banda 2"></td>
+              <td><a href="https://www.youtube.com/channel/UCbulh9WdLtEXiooRcYK7SWw" target="_blank" rel="noopener">Metallica</a></td>
+              <td>Metal</td>
+              <td><span class="badge bg-primary">Me gusta mucho</span></td>
+            </tr>
+            <tr>
+              <td><img src="img/GreenDay.jpg" class="foto-banda" alt="Foto de Tu banda 3"></td>
+              <td><a href="https://www.youtube.com/channel/UCqC_GY2ZiENFz2pwL0cSfAw" target="_blank" rel="noopener">Green Day</a></td>
+              <td>Pop Punk</td>
+              <td><span class="badge bg-secondary">Casual</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>Canciones favoritas</h3>
+      <div class="row">
+
+        <div class="col-6 col-md-3 mb-3">
+          <a class="cancion card h-100" href="https://www.youtube.com/watch?v=q5xl4Zip1fQ" target="_blank" rel="noopener">
+            <img src="img/Ardilla.jpg" class="card-img-top" alt="Portada de Tu canción 1">
+            <div class="card-body">
+              <h4>California</h4>
+              <p class="text-muted">Los Vaguens</p>
+            </div>
+          </a>
+        </div>
+
+        <div class="col-6 col-md-3 mb-3">
+          <a class="cancion card h-100" href="https://www.youtube.com/watch?v=IpVUNNaZLHw&list=RDIpVUNNaZLHw&start_radio=1" target="_blank" rel="noopener">
+            <img src="img/lilpeep.jpg" class="card-img-top" alt="Portada de Tu canción 2">
+            <div class="card-body">
+              <h4>Last Fall</h4>
+              <p class="text-muted">Horse Head, Lil Peep & Lil Tracy </p>
+            </div>
+          </a>
+        </div>
+
+        <div class="col-6 col-md-3 mb-3">
+          <a class="cancion card h-100" href="https://www.youtube.com/watch?v=icXUkIfZxyg" target="_blank" rel="noopener">
+            <img src="img/kingforaday.jpg" class="card-img-top" alt="Portada de Tu canción 3">
+            <div class="card-body">
+              <h4>King for a Day</h4>
+              <p class="text-muted">Pierce The Veil ft. Kellin Quinn</p>
+            </div>
+          </a>
+        </div>
+
+        <div class="col-6 col-md-3 mb-3">
+          <a class="cancion card h-100" href="https://www.youtube.com/watch?v=Tk9TM7-eTmw" target="_blank" rel="noopener">
+            <img src="img/joseph.jpg" class="card-img-top" alt="Portada de Tu canción 4">
+            <div class="card-body">
+              <h4>Joseph</h4>
+              <p class="text-muted">Falling In Reverse (feat. Corey Taylor and Serj Tankian)</p>
+            </div>
+          </a>
+        </div>
+
+      </div>
+    </section>
+
+        <!-- JUEGOS: catálogo con filtro (Ejemplo 2 del documento) -->
+    <section id="juegos" class="caja">
+      <h2>Catálogo de juegos favoritos</h2>
+
+      <button class="btn-filtro" onclick="filtrar('todos')">Ver todos</button>
+      <button class="btn-filtro" onclick="filtrar('shooter')">Ver shooters</button>
+      <button class="btn-filtro" onclick="filtrar('rpg')">Ver RPG</button>
+      <button class="btn-filtro" onclick="filtrar('moba')">Ver MOBA</button>
+      <button class="btn-filtro" onclick="filtrar('sandbox')">Ver Sandbox</button>
+
+      <div class="card" data-categoria="shooter">
+        <div class="card-body">
+          <h3>🎮 Counter-Strike 2</h3>
+          <p class="text-muted">Shooter | PC | Rango: Diamante</p>
+          <div class="progress"><div class="progress-bar" style="width: 85%">85%</div></div>
+        </div>
+      </div>
+
+      <div class="card" data-categoria="rpg">
+        <div class="card-body">
+          <h3>⚔️ The Witcher 3</h3>
+          <p class="text-muted">RPG | PC | Nivel 40</p>
+          <div class="progress"><div class="progress-bar" style="width: 60%">60%</div></div>
+        </div>
+      </div>
+
+      <div class="card" data-categoria="shooter">
+        <div class="card-body">
+          <h3>🎯 Valorant</h3>
+          <p class="text-muted">Shooter | PC | Rango: Oro</p>
+          <div class="progress"><div class="progress-bar" style="width: 40%">40%</div></div>
+        </div>
+      </div>
+
+      <div class="card" data-categoria="moba">
+        <div class="card-body">
+          <h3>🏆 League of Legends</h3>
+          <p class="text-muted">MOBA | PC | Rango máximo: Master</p>
+          <div class="progress"><div class="progress-bar" style="width: 85%">85%</div></div>
+        </div>
+      </div>
+
+      <div class="card" data-categoria="moba">
+        <div class="card-body">
+          <h3>📱 Mobile Legends</h3>
+          <p class="text-muted">MOBA | Celular | Rango máximo: Mítico (40 estrellas)</p>
+          <div class="progress"><div class="progress-bar" style="width: 80%">80%</div></div>
+        </div>
+      </div>
+
+      <div class="card" data-categoria="sandbox">
+        <div class="card-body">
+          <h3>⛏️ Minecraft</h3>
+          <p class="text-muted">Sandbox | Nivel: Bueno</p>
+          <div class="progress"><div class="progress-bar" style="width: 65%">65%</div></div>
+        </div>
+      </div>
+    </section>
+    <!-- FRASE -->
+    <section id="frase" class="mb-4">
+      <div class="frase-grafica text-center">
+        <p>If I find a path, would you walk it with me?</p>
+      </div>
+    </section>
+
+    <!-- CONTACTO: formulario con validación (Ejemplo 4 del documento) -->
+    <section id="contacto" class="caja">
+      <h2>Contacto</h2>
+      <form id="contactForm" novalidate>
+        <input type="text" id="nombre" class="form-control mb-2" placeholder="Tu nombre completo">
+        <input type="email" id="correo" class="form-control mb-2" placeholder="Tu correo">
+        <textarea id="mensaje" class="form-control mb-2" rows="3" placeholder="Tu mensaje"></textarea>
+        <button type="submit" class="btn-filtro">Enviar mensaje</button>
+      </form>
+      <div id="alertaBox" class="mt-3"></div>
+    </section>
+
+  </main>
+
+  <!-- PIE DE PÁGINA -->
+  <footer class="text-center">
+    <p>Sígueme en mis redes</p>
+    <a href="https://www.instagram.com/jfjahdkasfkj?xtok=MWFzejZ3anJpMXdxeQ==" target="_blank">Instagram</a>
+    <a href="https://github.com/DennisCarvajal69" target="_blank">GitHub</a>
+    <a href="https://www.facebook.com/share/1A5YcfnNdr/" target="_blank">Facebook</a>
+    <p class="mt-3">© 2026 Denilson Carvajal. Todos los derechos reservados.</p>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+</body>
+
+</html>
