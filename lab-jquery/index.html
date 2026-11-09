@@ -2,121 +2,286 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Lil Peep - Biografía</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LevelUp Arcade Bar</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 </head>
 <body>
 
-  <div id="encabezado">
-    <h1>Lil Peep</h1>
-    <p><em>Gustav Elijah Åhr (1996 - 2017)</em></p>
+  <!-- NAVBAR -->
+  <header class="navbar">
+    <a class="logo" href="#inicio">🕹️ LevelUp <span>Arcade Bar</span></a>
+
+    <div class="nav-right">
+      <a id="hold-chip" class="hold-chip hidden" href="#reserva" title="Plazo para confirmar tu reserva">
+        ⏳ <span id="hold-chip-time">05:00</span>
+      </a>
+      <span class="status"><i class="dot"></i> Abierto · 18:00–02:00</span>
+      <button id="theme-toggle">🌓 <span id="theme-indicator">Neón</span></button>
+      <button id="burger" class="burger" aria-label="Abrir menú" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+
+    <nav id="main-nav">
+      <a class="nav-link" href="#inicio"  data-view="inicio">🏠 Inicio</a>
+      <a class="nav-link" href="#todos"   data-view="todos">📚 Catálogo</a>
+      <a class="nav-link" href="#ps5"     data-view="ps5">🎮 PS5</a>
+      <a class="nav-link" href="#pc"      data-view="pc">💻 PC Gamer</a>
+      <a class="nav-link" href="#arcade"  data-view="arcade">👾 Arcade</a>
+      <a class="nav-link" href="#reserva" data-view="reserva">🧾 Reserva<i id="nav-dot" class="nav-dot hidden"></i></a>
+    </nav>
+  </header>
+
+  <!-- HERO compacto (se oculta en Inicio) -->
+  <section id="hero" class="hero theme-todos hidden">
+    <div id="hero-icon" class="hero-icon">🎮</div>
+    <div>
+      <h1 id="hero-title">Catálogo</h1>
+      <p id="hero-sub"></p>
+    </div>
+  </section>
+
+  <main class="wrap">
+
+    <!-- ===== PÁGINA: INICIO ===== -->
+    <section id="view-inicio" class="view">
+
+      <div class="landing">
+        <div class="landing-text">
+          <span class="pill">🕹️ Ciber Café Gamer</span>
+          <h1>Juega, reserva <br>y sube de nivel</h1>
+          <p>PS5, PC Gamer y Arcade retro en un solo lugar. ¿Vienen en grupo? Reserva varias máquinas a la vez y juega con tu equipo.</p>
+          <div class="cta">
+            <a class="btn-main btn-link" href="#todos">Ver estaciones</a>
+            <a class="btn-ghost btn-link" href="#reserva">Reservar en grupo</a>
+          </div>
+          <ul class="stats">
+            <li><b id="stat-total">0</b><span>Máquinas</span></li>
+            <li><b>18–02h</b><span>Horario</span></li>
+            <li><b id="stat-min">0</b><span>BOB desde / hora</span></li>
+          </ul>
+        </div>
+        <div class="landing-img media img-todos">
+          <span class="emoji">🎮</span>
+          <img src="img/portada.jpg" alt="LevelUp Arcade Bar" onerror="this.remove()">
+        </div>
+      </div>
+
+      <h2 class="sec-title">Elige tu zona</h2>
+      <div class="zones">
+        <a class="zone media img-ps5" href="#ps5">
+          <span class="emoji">🎮</span>
+          <img src="img/zona-ps5.jpg" alt="" onerror="this.remove()">
+          <div class="zone-label"><b>PlayStation 5</b><small>Consolas con TV 4K</small></div>
+        </a>
+        <a class="zone media img-pc" href="#pc">
+          <span class="emoji">💻</span>
+          <img src="img/zona-pc.jpg" alt="" onerror="this.remove()">
+          <div class="zone-label"><b>PC Gamer</b><small>RTX, 144Hz, periféricos pro</small></div>
+        </a>
+        <a class="zone media img-arcade" href="#arcade">
+          <span class="emoji">👾</span>
+          <img src="img/zona-arcade.jpg" alt="" onerror="this.remove()">
+          <div class="zone-label"><b>Arcade Retro</b><small>Clásicos para 2 jugadores</small></div>
+        </a>
+      </div>
+
+      <h2 class="sec-title">¿Cómo reservar en grupo?</h2>
+      <div class="steps">
+        <div class="step"><i>1</i><b>Elige las máquinas</b><small>Usa el contador de cada tarjeta. Puedes mezclar zonas.</small></div>
+        <div class="step"><i>2</i><b>Define las horas</b><small>Mismo tiempo para todo el grupo.</small></div>
+        <div class="step"><i>3</i><b>Llena tus datos</b><small>Quien reserva y cuántas personas son.</small></div>
+        <div class="step"><i>4</i><b>Confirma a tiempo</b><small>Tienes 5 minutos antes de que se libere.</small></div>
+      </div>
+
+      <h2 class="sec-title">Información</h2>
+      <div class="info-row">
+        <div class="box"><b>🕒 Horario</b><p>Lunes a domingo<br>18:00 – 02:00</p></div>
+        <div class="box"><b>📍 Ubicación</b><p>Tu dirección aquí<br>Referencia del local</p></div>
+        <div class="box"><b>📞 Contacto</b><p>WhatsApp: 75341964<br>marcelocarvajalel69@gmail.com</p></div>
+      </div>
+    </section>
+
+    <!-- ===== PÁGINA: CATÁLOGO ===== -->
+    <section id="view-catalogo" class="view hidden">
+      <p class="hint">👥 ¿Vienen en grupo? Usa el contador <b>− +</b> para ocupar varias máquinas.</p>
+      <div id="games" class="games-grid"></div>
+    </section>
+
+    <!-- ===== PÁGINA: RESERVA ===== -->
+    <section id="view-reserva" class="view hidden">
+      <div class="reserva-layout">
+
+        <div class="reserva-left">
+
+          <section class="box">
+            <h2>⏱️ Calculador</h2>
+            <div class="form-grid">
+              <label for="hrs">Horas</label>
+              <input type="number" id="hrs" value="1" min="1" max="12">
+              <label for="rate">Tarifa</label>
+              <select id="rate">
+                <option value="1">Normal</option>
+                <option value="0.85">⚡ Flash (-15%)</option>
+              </select>
+            </div>
+            <p class="hint small">Las horas aplican a todas las máquinas del grupo.</p>
+          </section>
+
+          <section class="box">
+            <h2>🍔 Combos Gamer</h2>
+            <div class="combo" data-name="Combo Gamer 1" data-price="20">
+              <div><strong>Combo 1</strong><small>Bebida + Papas</small></div>
+              <em>20 BOB</em>
+              <div class="counter"><button class="minus">−</button><span class="qty">0</span><button class="plus">+</button></div>
+            </div>
+            <div class="combo" data-name="Combo Gamer 2" data-price="35">
+              <div><strong>Combo 2</strong><small>Hamburguesa + Bebida</small></div>
+              <em>35 BOB</em>
+              <div class="counter"><button class="minus">−</button><span class="qty">0</span><button class="plus">+</button></div>
+            </div>
+            <div class="combo" data-name="Combo Gamer 3" data-price="50">
+              <div><strong>Combo 3</strong><small>Pizza + 2 Bebidas</small></div>
+              <em>50 BOB</em>
+              <div class="counter"><button class="minus">−</button><span class="qty">0</span><button class="plus">+</button></div>
+            </div>
+          </section>
+
+          <section class="box box-wide">
+            <h2>👤 Datos de quien reserva</h2>
+            <div id="client-form" class="client-form">
+
+              <div class="field">
+                <label for="nombre">Nombre completo</label>
+                <input id="nombre" type="text" placeholder="Ej: Juan Pérez" autocomplete="name">
+                <small class="err"></small>
+              </div>
+              <div class="field">
+                <label for="ci">Cédula de Identidad</label>
+                <input id="ci" type="text" inputmode="numeric" maxlength="9" placeholder="Ej: 8123456">
+                <small class="err"></small>
+              </div>
+              <div class="field">
+                <label for="tel">Celular</label>
+                <input id="tel" type="text" inputmode="numeric" maxlength="8" placeholder="Ej: 71234567" autocomplete="tel">
+                <small class="err"></small>
+              </div>
+              <div class="field">
+                <label for="email">Correo electrónico</label>
+                <input id="email" type="email" placeholder="correo@ejemplo.com" autocomplete="email">
+                <small class="err"></small>
+              </div>
+              <div class="field">
+                <label for="personas">Personas en el grupo</label>
+                <input id="personas" type="number" min="1" max="40" placeholder="Ej: 5">
+                <small class="err"></small>
+              </div>
+              <div class="field">
+                <label for="fecha">Fecha de la reserva</label>
+                <input id="fecha" type="date">
+                <small class="err"></small>
+              </div>
+              <div class="field">
+                <label for="hora">Hora de llegada</label>
+                <select id="hora">
+                  <option value="">Selecciona…</option>
+                  <option>18:00</option><option>19:00</option><option>20:00</option>
+                  <option>21:00</option><option>22:00</option><option>23:00</option>
+                  <option>00:00</option><option>01:00</option>
+                </select>
+                <small class="err"></small>
+              </div>
+              <div class="field field-full">
+                <label class="check">
+                  <input id="terms" type="checkbox">
+                  Confirmo que mis datos son correctos y acepto las condiciones de reserva.
+                </label>
+                <small class="err"></small>
+              </div>
+
+            </div>
+          </section>
+        </div>
+
+        <aside class="reserva-right">
+          <section class="box">
+            <h2>🧾 Resumen de Pedido</h2>
+
+            <div id="hold-box" class="hold-box hidden">
+              <div class="hold-row">
+                <span>⏳ Plazo para confirmar</span>
+                <strong id="hold-timer">05:00</strong>
+              </div>
+              <div class="timer-bar"><div id="hold-fill"></div></div>
+            </div>
+
+            <ul id="order-list"></ul>
+
+            <div class="total-row">
+              <span>Total a pagar</span>
+              <strong id="total-price">0 BOB</strong>
+            </div>
+            <button id="btn-confirm" class="btn-main">Confirmar Reserva</button>
+          </section>
+        </aside>
+
+      </div>
+    </section>
+  </main>
+
+  <!-- FOOTER CON REDES SOCIALES -->
+  <footer class="footer">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <b>🕹️ LevelUp <span>Arcade Bar</span></b>
+        <small>Juega, reserva y sube de nivel.</small>
+      </div>
+
+      <div class="socials">
+        <a href="https://www.facebook.com/share/1A5YcfnNdr/" target="_blank" rel="noopener" aria-label="Facebook" class="s-fb"><i class="fa-brands fa-facebook-f"></i></a>
+        <a href="https://www.instagram.com/jfjahdkasfkj?xtok=MWFzejZ3anJpMXdxeQ==" target="_blank" rel="noopener" aria-label="Instagram" class="s-ig"><i class="fa-brands fa-instagram"></i></a>
+        <a href="https://www.tiktok.com/@gaticoo7w7?is_from_webapp=1&sender_device=pc" target="_blank" rel="noopener" aria-label="TikTok" class="s-tt"><i class="fa-brands fa-tiktok"></i></a>
+      </div>
+
+      <small class="copy">© 2026 Denilson Carvajal • Todos los derechos reservados</small>
+    </div>
+  </footer>
+
+  <!-- BARRA FLOTANTE DEL GRUPO -->
+  <div id="cart-bar" class="cart-bar hidden">
+    <span>🛒 <b id="cb-count">0</b> máquina(s) · <b id="cb-total">0</b> BOB/h</span>
+    <a class="btn-main btn-link" href="#reserva">Ir a reservar →</a>
   </div>
 
-  <hr>
-
-  <div id="menu">
-    <a href="#biografia">Biografía</a> |
-    <a href="#discografia">Discografía</a> |
-    <a href="#datos">Datos rápidos</a> |
-    <a href="https://es.wikipedia.org/wiki/Lil_Peep" target="_blank">Más en Wikipedia</a>
+  <!-- MODAL -->
+  <div id="modal-overlay">
+    <div class="modal">
+      <div class="modal-head">
+        <h3>Confirmar Reserva — LevelUp</h3>
+        <button id="modal-close" aria-label="Cerrar">✕</button>
+      </div>
+      <p class="modal-text">Verifique el detalle de su transacción antes de procesar el registro:</p>
+      <ul class="modal-details">
+        <li><span>Cliente</span><strong id="m-client">—</strong></li>
+        <li><span>Grupo</span><strong id="m-group">—</strong></li>
+        <li><span>Fecha y hora</span><strong id="m-when">—</strong></li>
+        <li><span>Servicio</span><strong id="m-service">—</strong></li>
+        <li><span>Monto a Cancelar</span><strong id="m-amount">—</strong></li>
+        <li><span>Tiempo Restante para Confirmar</span><strong id="m-timer">00:30</strong></li>
+      </ul>
+      <div class="timer-bar"><div id="timer-fill"></div></div>
+      <div class="modal-actions">
+        <button id="m-cancel" class="btn-ghost">Cancelar</button>
+        <button id="m-pay" class="btn-main">Procesar Pago</button>
+      </div>
+    </div>
   </div>
 
-  <hr>
-  
-  <div id="foto">
-    <img src="https://cdn.displate.com/artwork/2024-10-30/284dc837-3803-4d3f-968d-db055779eea0.jpg?speedsize=w_681" alt="Foto de Lil Peep" width="300">
-    <p>Lil Peep, artista de emo rap.</p>
-  </div>
+  <div id="toast-box"></div>
 
-  <hr>
-
-  <div id="biografia">
-    <h2>Biografía</h2>
-
-    <h3>Inicios</h3>
-    <p>
-      Gustav Åhr nació el 1 de noviembre de 1996 en Allentown, Pensilvania
-      (Estados Unidos) y creció en Long Island, Nueva York. Empezó a subir
-      música a internet siendo adolescente, principalmente a SoundCloud,
-      donde fue ganando seguidores.
-    </p>
-
-    <h3>Estilo y ascenso</h3>
-    <p>
-      Su música mezcla el rap con el emo, el punk y el rock alternativo, un
-      estilo que se conoce como <strong>emo rap</strong> o cloud rap. Sus
-      letras hablan de la tristeza, la soledad y la salud mental. También
-      fue parte del colectivo <strong>GothBoiClique</strong>, junto a
-      artistas como Lil Tracy.
-    </p>
-
-    <h3>Fallecimiento</h3>
-    <p>
-      Murió el 15 de noviembre de 2017 en Tucson, Arizona, a los 21 años,
-      por una sobredosis accidental. Su música sigue siendo escuchada por
-      mucha gente en todo el mundo.
-    </p>
-  </div>
-
-  <hr>
-  
-  <div id="discografia">
-    <h2>Discografía destacada</h2>
-    <table border="1">
-      <tr>
-        <th>Título</th>
-        <th>Tipo</th>
-        <th>Año</th>
-      </tr>
-      <tr>
-        <td>Crybaby</td>
-        <td>Mixtape</td>
-        <td>2016</td>
-      </tr>
-      <tr>
-        <td>Hellboy</td>
-        <td>Mixtape</td>
-        <td>2016</td>
-      </tr>
-      <tr>
-        <td>Come Over When You're Sober, Pt. 1</td>
-        <td>Álbum</td>
-        <td>2017</td>
-      </tr>
-      <tr>
-        <td>Come Over When You're Sober, Pt. 2</td>
-        <td>Álbum (póstumo)</td>
-        <td>2018</td>
-      </tr>
-    </table>
-
-    <h3>Canciones conocidas</h3>
-    <ul>
-      <li>Star Shopping</li>
-      <li>Awful Things</li>
-      <li>Save That Shit</li>
-      <li>The Brightside</li>
-    </ul>
-  </div>
-
-  <hr>
-
-  <div id="datos">
-    <h2>Datos rápidos</h2>
-    <ol>
-      <li>Nombre real: Gustav Elijah Åhr</li>
-      <li>Nacimiento: 1 de noviembre de 1996, Allentown (EE. UU.)</li>
-      <li>Género: emo rap, cloud rap</li>
-      <li>Colectivo: GothBoiClique</li>
-      <li>Documental: Everybody's Everything (2019)</li>
-    </ol>
-  </div>
-
-  <hr>
-  
-  <div id="pie">
-    <p>© 2026 - Denilson Carvajal - Todos los derechos reservados.</p>
-  </div>
-
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+  <script src="script.js"></script>
 </body>
-    </html>
+</html>
