@@ -1,0 +1,505 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+/* ---------- Variables ---------- */
+:root {
+  --principal: #d6336c;   /* rosa */
+  --acento: #b197fc;      /* lila */
+  --oscuro: #15121c;      /* negro */
+  --fondo: #f6f1ff;
+  --caja: #ffffff;
+  --texto: #1a1625;
+  --texto-suave: #6b6480;
+  --borde: #e4daf7;
+}
+
+/* El JS agrega esta clase al body */
+body.dark-mode {
+  --oscuro: #07050b;
+  --fondo: #0d0b12;
+  --caja: #18141f;
+  --texto: #f1ecfa;
+  --texto-suave: #a79fba;
+  --borde: #2f2740;
+}
+
+/* ---------- General (sin scroll suave: no hay anclas) ---------- */
+html, body { max-width: 100%; overflow-x: hidden; }
+*, *::before, *::after { box-sizing: border-box; }
+img, iframe, video { max-width: 100%; }
+
+body {
+  font-family: "Inter", "Segoe UI", system-ui, -apple-system, Arial, sans-serif;
+  background-color: var(--fondo);
+  color: var(--texto);
+  line-height: 1.7;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+main.container { max-width: 960px; padding-top: 16px; }
+
+h1, h2, h3 {
+  color: var(--texto);
+  font-weight: 700;
+  letter-spacing: -0.01em;
+}
+
+h2 { font-size: 1.5rem; margin-bottom: 22px; }
+
+h2::after {
+  content: "";
+  display: block;
+  width: 40px;
+  height: 3px;
+  margin-top: 8px;
+  border-radius: 2px;
+  background-color: var(--acento);
+}
+
+h3 { font-size: 1.1rem; margin: 18px 0 8px; }
+
+.text-muted { color: var(--texto-suave) !important; }
+
+/* ---------- Encabezado con carrusel de fondo (igual en todas las secciones) ---------- */
+header {
+  position: relative;
+  overflow: hidden;
+  background-color: var(--oscuro);
+  color: white;
+  border-top: 4px solid var(--principal);
+  padding: 20px 20px 48px;
+}
+
+.fondo-carrusel {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+
+.fondo-carrusel .carousel-inner,
+.fondo-carrusel .carousel-item {
+  height: 100%;
+}
+
+.fondo-carrusel .carousel-item {
+  background-size: cover;
+  background-position: center;
+}
+
+.fondo-carrusel .carousel-item::before {
+  content: "";
+  position: absolute;
+  inset: -30px;
+  background: inherit;
+  filter: blur(25px);
+}
+
+.fondo-carrusel .carousel-item img {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.capa-oscura {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  background: linear-gradient(rgba(21, 18, 28, 0.35), rgba(21, 18, 28, 0.55));
+}
+
+.contenido-header {
+  position: relative;
+  z-index: 2;
+}
+
+header h1 { font-size: 1.6rem; margin: 0; color: white; }
+
+header p { color: rgba(255, 255, 255, 0.85); margin: 4px 0 0; }
+
+.contenido-header h1,
+.contenido-header p,
+.nav-menu a {
+  text-shadow: 0 2px 6px rgba(0, 0, 0, 0.7);
+}
+
+.foto-perfil {
+  width: 140px;
+  height: 140px;
+  object-fit: cover;
+  border-radius: 50%;
+  border: 3px solid white;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.4);
+  margin: 10px 0 16px;
+}
+
+.barra-top {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+
+.btn-header {
+  background: rgba(0, 0, 0, 0.3);
+  color: white;
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  padding: 7px 14px;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.btn-header:hover {
+  background: var(--principal);
+  border-color: var(--principal);
+}
+
+/* ---------- Menú: oculto en celular, lo despliega jQuery (.slideToggle) ---------- */
+.nav-menu {
+  display: none;
+  flex-direction: column;
+  gap: 2px;
+  margin-top: 20px;
+}
+
+.nav-menu a {
+  display: block;
+  color: rgba(255, 255, 255, 0.9);
+  text-decoration: none;
+  font-weight: 500;
+  font-size: 0.95rem;
+  padding: 8px 12px;
+  border-radius: 8px;
+  transition: 0.2s;
+}
+
+.nav-menu a:hover {
+  color: white;
+  background-color: rgba(255, 255, 255, 0.2);
+}
+
+.nav-menu a.activo {
+  background-color: var(--principal);
+  color: white;
+}
+
+/* ---------- Páginas: solo se ve una a la vez ---------- */
+.pagina { display: none; }
+
+/* ---------- Cajas y tarjetas ---------- */
+.caja {
+  background-color: var(--caja);
+  border: 1px solid var(--borde);
+  border-radius: 12px;
+  padding: 20px;
+  margin-bottom: 28px;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
+  transition: background-color 0.3s;
+}
+
+.card {
+  background-color: var(--caja);
+  color: var(--texto);
+  border: 1px solid var(--borde);
+  border-radius: 12px;
+}
+
+.card h2 { font-size: 1.25rem; }
+.card h3 { margin-top: 0; }
+.card p:last-child { margin-bottom: 0; }
+
+/* ---------- Tarjetas de juegos ---------- */
+#juegos .card { margin-top: 12px; }
+#juegos .card p { margin-bottom: 10px; }
+
+/* ---------- Tablas ---------- */
+.table {
+  --bs-table-bg: transparent;
+  --bs-table-color: var(--texto);
+  --bs-table-border-color: var(--borde);
+  --bs-table-striped-color: var(--texto);
+  --bs-table-striped-bg: rgba(128, 128, 128, 0.07);
+  margin-bottom: 0;
+}
+
+.table-dark {
+  --bs-table-bg: var(--fondo);
+  --bs-table-color: var(--texto-suave);
+  --bs-table-border-color: var(--borde);
+}
+
+.table th { font-weight: 600; }
+.table th, .table td { padding: 12px 14px; word-break: normal; overflow-wrap: break-word; }
+
+.badge { font-weight: 500; padding: 0.45em 0.8em; }
+
+/* ---------- Barras de nivel ---------- */
+.progress {
+  height: 1.1rem;
+  font-size: 0.7rem;
+  background-color: var(--borde);
+  border-radius: 99px;
+}
+
+.progress-bar { background-color: var(--principal) !important; }
+
+/* ---------- Iframe (horario) ---------- */
+iframe { border: 1px solid var(--borde); border-radius: 10px; }
+
+/* ---------- Botones de filtro y envío ---------- */
+.btn-filtro {
+  background: transparent;
+  color: var(--texto);
+  border: 1px solid var(--borde);
+  padding: 7px 16px;
+  margin-right: 5px;
+  margin-bottom: 6px;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.btn-filtro:hover {
+  background: var(--principal);
+  border-color: var(--principal);
+  color: white;
+}
+
+/* ---------- Frase ---------- */
+.frase-grafica {
+  background-color: var(--oscuro);
+  color: white;
+  padding: 36px 20px;
+  border-radius: 12px;
+  margin-bottom: 28px;
+  transition: background-color 0.3s;
+}
+
+.frase-grafica p {
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 1.3rem;
+  font-style: italic;
+  line-height: 1.4;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.frase-grafica p::before {
+  content: "“";
+  display: block;
+  font-size: 4.5rem;
+  line-height: 0.6;
+  color: var(--acento);
+}
+
+/* ---------- Formularios ---------- */
+.etiqueta {
+  display: block;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--texto-suave);
+  margin-bottom: 4px;
+}
+
+.form-control,
+.form-select {
+  background-color: var(--caja);
+  color: var(--texto);
+  border: 1px solid var(--borde);
+  border-radius: 8px;
+  padding: 10px 14px;
+}
+
+.form-control:focus,
+.form-select:focus {
+  background-color: var(--caja);
+  color: var(--texto);
+  border-color: var(--principal);
+  box-shadow: 0 0 0 3px rgba(214, 51, 108, 0.2);
+}
+
+.form-control::placeholder { color: var(--texto-suave); }
+
+.msg-error { color: #dc2626; font-weight: bold; margin: 0; }
+.msg-exito { color: #16a34a; font-weight: bold; margin: 0; }
+
+.error-msg {
+  display: none;
+  color: #dc2626;
+  font-size: 0.8rem;
+  font-weight: 500;
+  margin-top: 4px;
+}
+
+/* Formulario de contacto: 1 columna en celular, 2 en tablet y PC */
+.form-contacto { display: grid; grid-template-columns: 1fr; gap: 12px; }
+.campo { min-width: 0; }
+.contador { float: right; font-weight: 400; }
+
+/* ---------- Pie de página ---------- */
+footer {
+  background-color: var(--oscuro);
+  border-top: 3px solid var(--principal);
+  color: white;
+  padding: 32px 20px;
+  margin-top: 0;
+  transition: background-color 0.3s;
+}
+
+footer p { margin: 0 0 8px; opacity: 0.85; }
+
+footer a {
+  color: white;
+  text-decoration: none;
+  margin: 0 12px;
+  font-weight: 500;
+  opacity: 0.9;
+}
+
+footer a:hover { opacity: 1; text-decoration: underline; }
+
+/* ---------- Música: fotos de bandas y tarjetas de canciones ---------- */
+.foto-banda {
+  width: 56px;
+  height: 56px;
+  object-fit: cover;
+  border-radius: 50%;
+  border: 2px solid var(--borde);
+}
+
+.table a {
+  color: var(--principal);
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.table a:hover { text-decoration: underline; }
+
+.cancion {
+  color: inherit;
+  text-decoration: none;
+  overflow: hidden;
+  transition: transform 0.2s, border-color 0.2s;
+}
+
+.cancion:hover {
+  transform: translateY(-4px);
+  border-color: var(--principal);
+}
+
+.cancion img {
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+}
+
+.cancion h4 {
+  font-size: 1rem;
+  font-weight: 700;
+  margin: 0 0 4px;
+  color: var(--texto);
+}
+
+/* ============================================
+   FOOTER SIEMPRE AL FONDO DE LA PANTALLA
+   ============================================ */
+.pwa-container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  min-height: 100dvh;
+}
+
+.pwa-container main.container {
+  flex: 1 0 auto;
+  width: 100%;
+  max-width: 1100px;
+}
+
+.pwa-container header,
+.pwa-container footer { flex-shrink: 0; }
+
+/* ============================================
+   TABLAS EN CELULAR: cada fila pasa a ser una tarjeta
+   ============================================ */
+@media (max-width: 767px) {
+
+  /* ----- Sobre mí: etiqueta arriba, dato abajo ----- */
+  .tabla-datos, .tabla-datos tbody, .tabla-datos tr,
+  .tabla-datos th, .tabla-datos td { display: block; width: 100%; }
+
+  .tabla-datos { border: 0; }
+  .tabla-datos tr { padding: 10px 0; border-bottom: 1px solid var(--borde); }
+  .tabla-datos tr:last-child { border-bottom: 0; }
+  .tabla-datos th, .tabla-datos td { border: 0; padding: 2px 4px; background: transparent; box-shadow: none; }
+  .tabla-datos th {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--texto-suave);
+  }
+
+  /* ----- Bandas: foto a la izquierda, datos a la derecha ----- */
+  .tabla-bandas, .tabla-bandas tbody, .tabla-bandas tr,
+  .tabla-bandas td { display: block; width: 100%; }
+
+  .tabla-bandas { border: 0; }
+  .tabla-bandas thead { display: none; }
+
+  .tabla-bandas tr {
+    display: grid;
+    grid-template-columns: 72px 1fr;
+    column-gap: 14px;
+    align-items: center;
+    padding: 12px;
+    margin-bottom: 12px;
+    background-color: var(--caja);
+    border: 1px solid var(--borde);
+    border-radius: 12px;
+  }
+
+  .tabla-bandas td { border: 0; padding: 2px 0; background: transparent; box-shadow: none; }
+
+  .tabla-bandas td:nth-child(1) { grid-row: 1 / span 3; grid-column: 1; }
+  .tabla-bandas td:nth-child(2) { grid-column: 2; font-size: 1.05rem; }
+  .tabla-bandas td:nth-child(3) { grid-column: 2; color: var(--texto-suave); font-size: 0.85rem; }
+  .tabla-bandas td:nth-child(3)::before { content: "Género: "; }
+  .tabla-bandas td:nth-child(4) { grid-column: 2; }
+
+  .tabla-bandas .foto-banda { width: 72px; height: 72px; }
+}
+
+/* ============================================
+   ADAPTABLE A CUALQUIER PANTALLA
+   ============================================ */
+
+/* Tablet y PC (768 px o más): menú siempre visible */
+@media (min-width: 768px) {
+  .nav-menu {
+    display: flex !important;   /* gana sobre el estilo inline de slideToggle */
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  .nav-menu a { display: inline-block; }
+  #burguerBtn { visibility: hidden; }
+
+  .caja { padding: 32px; }
+  header h1 { font-size: 2.2rem; }
+  .frase-grafica { padding: 56px 32px; }
+  .frase-grafica p { font-size: 1.75rem; }
+
+  .form-contacto { grid-template-columns: 1fr 1fr; gap: 14px 18px; }
+  .campo-full { grid-column: 1 / -1; }
+}
+
+/* PC (992 px o más): más aire y foto más grande */
+@media (min-width: 992px) {
+  header { padding: 28px 40px 60px; }
+  .foto-perfil { width: 170px; height: 170px; }
+  .caja { padding: 40px; }
+  .foto-banda { width: 64px; height: 64px; }
+}
