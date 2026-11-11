@@ -3,8 +3,17 @@
 
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Im - Mi página personal</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>Denilson Carvajal - Mi página personal</title>
+
+  <!-- PWA -->
+  <link rel="manifest" href="manifest.json">
+  <meta name="theme-color" content="#d6336c">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-title" content="Denilson">
+  <link rel="apple-touch-icon" href="img/icon-192.png">
+  <link rel="icon" href="img/icon-192.png">
 
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
@@ -15,151 +24,135 @@
 
 <body>
 
-<div class="pwa-container">
+<div class="app">
 
-  <header id="inicio" class="text-center">
+  <!-- ========== BARRA SUPERIOR ========== -->
+  <header class="topbar">
+    <img class="avatar" src="img/fotoperfil.png" alt="Foto de Denilson">
 
-    <div id="miCarrusel" class="carousel slide carousel-fade fondo-carrusel" data-bs-ride="carousel" data-bs-pause="false">
-      <div class="carousel-inner">
-        <div class="carousel-item active" style="background-image: url('img/foto1.png')">
-          <img src="img/foto1.png" alt="">
-        </div>
-        <div class="carousel-item" style="background-image: url('img/foto2.png')">
-          <img src="img/foto2.png" alt="">
-        </div>
-        <div class="carousel-item" style="background-image: url('img/foto3.png')">
-          <img src="img/foto3.png" alt="">
-        </div>
+    <div class="perfil-mini">
+      <b>Denilson Carvajal</b>
+      <div class="nivel">
+        <span class="barra-nivel"><i></i></span>
+        <span>Ing. de Sistemas</span>
       </div>
     </div>
 
-    <div class="capa-oscura"></div>
+    <div class="acciones">
+      <!-- Botón de instalar: oculto hasta que el navegador permita instalar -->
+      <button id="installBtn" class="btn-icono" hidden
+              data-modulo="instalar" data-cuando="instalable" data-hidratado="false"
+              aria-label="Instalar app" title="Instalar app">⬇️</button>
 
-    <div class="contenido-header">
-      <div class="barra-top">
-        <button id="burguerBtn" class="btn-header">☰ Menú</button>
-        <button id="themeBtn" class="btn-header">🌙 Cambiar modo</button>
-      </div>
+      <button id="themeBtn" class="btn-icono"
+              data-modulo="tema" data-cuando="interaccion" data-hidratado="false"
+              aria-label="Cambiar modo">🌙</button>
 
-      <img class="foto-perfil" src="img/fotoperfil.png" alt="Foto de Denilson">
-      <h1>Denilson Marcelo Carvajal Rojas</h1>
-      <p class="subtitulo">Estudiante de Ingenieria de Sistemas</p>
-
-      <nav id="navMenu" class="nav-menu">
-        <a href="#sobre-mi"   data-pagina="sobre-mi">Sobre mí</a>
-        <a href="#gustos"     data-pagina="gustos">Gustos</a>
-        <a href="#proyectos"  data-pagina="proyectos">Proyectos</a>
-        <a href="#horario"    data-pagina="horario">Horario</a>
-        <a href="#musica"     data-pagina="musica">Música</a>
-        <a href="#juegos"     data-pagina="juegos">Juegos</a>
-        <a href="#contacto"   data-pagina="contacto">Contacto</a>
-      </nav>
+      <button id="burguerBtn" class="btn-icono"
+              data-modulo="menu-boton" data-cuando="carga" data-hidratado="false"
+              aria-label="Menú">⏳</button>
     </div>
 
+    <!-- Menú desplegable: se hidrata la primera vez que se abre -->
+    <nav id="navMenu" class="menu-desplegable"
+         data-modulo="menu-lista" data-cuando="menu" data-hidratado="false">
+      <a href="#inicio"   data-pagina="inicio">🏠 Inicio</a>
+      <a href="#sobre-mi" data-pagina="sobre-mi">👤 Sobre mí</a>
+      <a href="#horario"  data-pagina="horario">📅 Horario</a>
+      <a href="#musica"   data-pagina="musica">🎵 Música</a>
+      <a href="#redes"    data-pagina="redes">🔗 Redes</a>
+      <hr>
+      <button data-modal="m-gustos"    data-modulo="abrir-modal" data-cuando="menu" data-hidratado="false">❤️ Gustos</button>
+      <button data-modal="m-proyectos" data-modulo="abrir-modal" data-cuando="menu" data-hidratado="false">💻 Proyectos</button>
+      <button data-modal="m-juegos"    data-modulo="abrir-modal" data-cuando="menu" data-hidratado="false">🎮 Juegos</button>
+      <button data-modal="m-contacto"  data-modulo="abrir-modal" data-cuando="menu" data-hidratado="false">✉️ Contacto</button>
+    </nav>
   </header>
 
-  <main class="container my-4">
+  <!-- ========== ZONA CENTRAL ========== -->
+  <main class="stage">
 
-    <!-- ========== SOBRE MÍ ========== -->
-    <section id="pg-sobre-mi" class="pagina">
-      <div class="caja">
-        <h2>Sobre mí</h2>
-        <p>
-          Soy estudiante de la carrera de Ingenieria de Sistemas. Me gusta el desarrollo web,
-          las bases de datos y la creacion de aplicaciones moviles. Me considero una persona curiosa, responsable y con muchas ganas de aprender.
-        </p>
-        <table class="table table-bordered tabla-datos">
-          <tr><th>Nombre</th><td>Denilson Marcelo Carvajal Rojas</td></tr>
-          <tr><th>Estudio</th><td>Ingeniera de Sistemas</td></tr>
-          <tr><th>Oficio</th><td>Actualmente no me encuentro trabajando en alguna empresa de Desarrollo web, pero si me sale alguno que otro laburo. :D</td></tr>
-          <tr><th>Ciudad</th><td>La Paz, Bolivia</td></tr>
-          <tr><th>Cumpleaños</th><td>27 de enero</td></tr>
-        </table>
-      </div>
+    <!-- ===== INICIO ===== -->
+    <section id="v-inicio" class="vista vista-inicio">
 
-      <div class="frase-grafica text-center">
-        <p>If I find a path, would you walk it with me?</p>
-      </div>
-    </section>
-
-    <!-- ========== GUSTOS ========== -->
-    <section id="pg-gustos" class="pagina">
-      <div class="row">
-        <div class="col-md-6 mb-3 mb-md-0">
-          <div class="card h-100">
-            <div class="card-body">
-              <h2>Pasatiempos</h2>
-              <p class="text-muted">No productivo.</p>
-              <ul>
-                <li>Ver series y anime</li>
-                <li>Salir con amigos</li>
-                <li>Caminar sin rumbo</li>
-                <li>Dormir siestas</li>
-                <li>Ver videos en YouTube</li>
-              </ul>
-            </div>
-          </div>
+      <div id="miCarrusel" class="carousel slide carousel-fade fondo-carrusel" data-bs-ride="carousel" data-bs-pause="false">
+        <div class="carousel-indicators">
+          <button type="button" data-bs-target="#miCarrusel" data-bs-slide-to="0" class="active"></button>
+          <button type="button" data-bs-target="#miCarrusel" data-bs-slide-to="1"></button>
+          <button type="button" data-bs-target="#miCarrusel" data-bs-slide-to="2"></button>
         </div>
-        <div class="col-md-6">
-          <div class="card h-100">
-            <div class="card-body">
-              <h2>Intereses</h2>
-              <p class="text-muted">Productivo.</p>
-              <ul>
-                <li>Desarrollo web</li>
-                <li>Ir al Gym</li>
-                <li>Bases de datos</li>
-                <li>Aprender Ingles</li>
-              </ul>
-            </div>
+        <div class="carousel-inner">
+          <div class="carousel-item active" style="background-image: url('img/foto1.png')">
+            <img src="img/foto1.png" alt="">
+          </div>
+          <div class="carousel-item" style="background-image: url('img/foto2.png')">
+            <img src="img/foto2.png" alt="">
+          </div>
+          <div class="carousel-item" style="background-image: url('img/foto3.png')">
+            <img src="img/foto3.png" alt="">
           </div>
         </div>
       </div>
+      <div class="capa-oscura"></div>
+
+      <!-- Botones flotantes laterales (abren ventanas) -->
+      <div class="lateral">
+        <button class="lat-btn" data-modal="m-gustos" data-modulo="abrir-modal" data-cuando="interaccion" data-hidratado="false"><span class="lat-ico">❤️</span><small>Gustos</small></button>
+        <button class="lat-btn" data-modal="m-proyectos" data-modulo="abrir-modal" data-cuando="interaccion" data-hidratado="false"><span class="lat-ico">💻</span><small>Proyectos</small></button>
+        <button class="lat-btn" data-modal="m-juegos" data-modulo="abrir-modal" data-cuando="interaccion" data-hidratado="false"><span class="lat-ico">🎮</span><small>Juegos</small></button>
+      </div>
+
+      <div class="hero-texto">
+        <h1>Estudiante de Ingeniería de Sistemas</h1>
+        <p>Desarrollo web, bases de datos y apps móviles · La Paz, Bolivia</p>
+      </div>
+
+      <button class="btn-contacto" data-modal="m-contacto"
+              data-modulo="abrir-modal" data-cuando="interaccion" data-hidratado="false">✈️ CONTACTO</button>
     </section>
 
-    <!-- ========== PROYECTOS ========== -->
-    <section id="pg-proyectos" class="pagina">
-      <div class="caja">
-        <h2>Mis proyectos</h2>
-        <div class="row">
-          <div class="col-md-4 mb-3">
-            <div class="card h-100"><div class="card-body">
-              <h3>Registro de estudiantes</h3>
-              <p>Sistema completo con PHP, MySQL y Bootstrap, hecho con XAMPP.</p>
-            </div></div>
-          </div>
-          <div class="col-md-4 mb-3">
-            <div class="card h-100"><div class="card-body">
-              <h3>Ventas de pasteleria</h3>
-              <p>Sistema con ASP.NET MVC, Entity Framework y MySQL.</p>
-            </div></div>
-          </div>
-          <div class="col-md-4 mb-3">
-            <div class="card h-100"><div class="card-body">
-              <h3>Proyecto Personal</h3>
-              <p>Proyecto de desarrollo web personal. (El actual)</p>
-            </div></div>
-          </div>
+    <!-- ===== SOBRE MÍ ===== -->
+    <section id="v-sobre-mi" class="vista">
+      <div class="contenedor">
+        <div class="caja">
+          <h2>Sobre mí</h2>
+          <p>
+            Soy estudiante de la carrera de Ingenieria de Sistemas. Me gusta el desarrollo web,
+            las bases de datos y la creacion de aplicaciones moviles. Me considero una persona curiosa, responsable y con muchas ganas de aprender.
+          </p>
+          <table class="table table-bordered tabla-datos">
+            <tr><th>Nombre</th><td>Denilson Marcelo Carvajal Rojas</td></tr>
+            <tr><th>Estudio</th><td>Ingeniera de Sistemas</td></tr>
+            <tr><th>Oficio</th><td>Actualmente no me encuentro trabajando en alguna empresa de Desarrollo web, pero si me sale alguno que otro laburo. :D</td></tr>
+            <tr><th>Ciudad</th><td>La Paz, Bolivia</td></tr>
+            <tr><th>Cumpleaños</th><td>27 de enero</td></tr>
+          </table>
+        </div>
+
+        <div class="frase-grafica text-center">
+          <p>If I find a path, would you walk it with me?</p>
         </div>
       </div>
     </section>
 
-    <!-- ========== HORARIO ========== -->
-    <section id="pg-horario" class="pagina">
-      <div class="caja">
-        <h2>Mi horario</h2>
-        <p class="text-muted">Mis horarios hecho en Google Sheets.</p>
-        <iframe src="https://docs.google.com/spreadsheets/d/e/2PACX-1vTaqLlB1NpE_YdMDZ7DyEdwpnyHJO0pag1XnDGEBgo_J5tzFg8pbv8-CFLFfmCkD0aJLAYIVqzSfFNL/pubhtml?gid=0&amp;single=true&amp;widget=true&amp;headers=false" width="100%" height="350"></iframe>
+    <!-- ===== HORARIO ===== -->
+    <section id="v-horario" class="vista">
+      <div class="contenedor">
+        <div class="caja">
+          <h2>Mi horario</h2>
+          <p class="text-muted">Mis horarios hecho en Google Sheets.</p>
+          <iframe src="https://docs.google.com/spreadsheets/d/e/2PACX-1vTaqLlB1NpE_YdMDZ7DyEdwpnyHJO0pag1XnDGEBgo_J5tzFg8pbv8-CFLFfmCkD0aJLAYIVqzSfFNL/pubhtml?gid=0&amp;single=true&amp;widget=true&amp;headers=false" width="100%" height="400"></iframe>
+        </div>
       </div>
     </section>
 
-    <!-- ========== MÚSICA ========== -->
-    <section id="pg-musica" class="pagina">
-      <div class="caja">
-        <h2>Mi música favorita</h2>
+    <!-- ===== MÚSICA ===== -->
+    <section id="v-musica" class="vista">
+      <div class="contenedor">
+        <div class="caja">
+          <h2>Mi música favorita</h2>
 
-        <h3>Bandas</h3>
-        <div>
+          <h3>Bandas</h3>
           <table class="table table-striped table-bordered align-middle tabla-bandas">
             <thead class="table-dark">
               <tr><th>Foto</th><th>Banda</th><th>Género</th><th>Nivel de fan</th></tr>
@@ -185,188 +178,252 @@
               </tr>
             </tbody>
           </table>
-        </div>
 
-        <h3>Canciones favoritas</h3>
-        <div class="row">
-
-          <div class="col-6 col-md-3 mb-3">
-            <a class="cancion card h-100" href="https://www.youtube.com/watch?v=q5xl4Zip1fQ" target="_blank" rel="noopener">
-              <img src="img/Ardilla.jpg" class="card-img-top" alt="Portada de California">
-              <div class="card-body">
-                <h4>California</h4>
-                <p class="text-muted">Los Vaguens</p>
-              </div>
-            </a>
-          </div>
-
-          <div class="col-6 col-md-3 mb-3">
-            <a class="cancion card h-100" href="https://www.youtube.com/watch?v=IpVUNNaZLHw&list=RDIpVUNNaZLHw&start_radio=1" target="_blank" rel="noopener">
-              <img src="img/lilpeep.jpg" class="card-img-top" alt="Portada de Last Fall">
-              <div class="card-body">
-                <h4>Last Fall</h4>
-                <p class="text-muted">Horse Head, Lil Peep & Lil Tracy </p>
-              </div>
-            </a>
-          </div>
-
-          <div class="col-6 col-md-3 mb-3">
-            <a class="cancion card h-100" href="https://www.youtube.com/watch?v=icXUkIfZxyg" target="_blank" rel="noopener">
-              <img src="img/kingforaday.jpg" class="card-img-top" alt="Portada de King for a Day">
-              <div class="card-body">
-                <h4>King for a Day</h4>
-                <p class="text-muted">Pierce The Veil ft. Kellin Quinn</p>
-              </div>
-            </a>
-          </div>
-
-          <div class="col-6 col-md-3 mb-3">
-            <a class="cancion card h-100" href="https://www.youtube.com/watch?v=Tk9TM7-eTmw" target="_blank" rel="noopener">
-              <img src="img/joseph.jpg" class="card-img-top" alt="Portada de Joseph">
-              <div class="card-body">
-                <h4>Joseph</h4>
-                <p class="text-muted">Falling In Reverse (feat. Corey Taylor and Serj Tankian)</p>
-              </div>
-            </a>
-          </div>
-
-        </div>
-      </div>
-    </section>
-
-    <!-- ========== JUEGOS ========== -->
-    <section id="pg-juegos" class="pagina">
-      <div id="juegos" class="caja">
-        <h2>Catálogo de juegos favoritos</h2>
-
-        <button class="btn-filtro" onclick="filtrar('todos')">Ver todos</button>
-        <button class="btn-filtro" onclick="filtrar('shooter')">Ver shooters</button>
-        <button class="btn-filtro" onclick="filtrar('rpg')">Ver RPG</button>
-        <button class="btn-filtro" onclick="filtrar('moba')">Ver MOBA</button>
-        <button class="btn-filtro" onclick="filtrar('sandbox')">Ver Sandbox</button>
-
-        <div class="card" data-categoria="shooter">
-          <div class="card-body">
-            <h3>🎮 Counter-Strike 2</h3>
-            <p class="text-muted">Shooter | PC | Rango: Diamante</p>
-            <div class="progress"><div class="progress-bar" style="width: 85%">85%</div></div>
-          </div>
-        </div>
-
-        <div class="card" data-categoria="rpg">
-          <div class="card-body">
-            <h3>⚔️ The Witcher 3</h3>
-            <p class="text-muted">RPG | PC | Nivel 40</p>
-            <div class="progress"><div class="progress-bar" style="width: 60%">60%</div></div>
-          </div>
-        </div>
-
-        <div class="card" data-categoria="shooter">
-          <div class="card-body">
-            <h3>🎯 Valorant</h3>
-            <p class="text-muted">Shooter | PC | Rango: Oro</p>
-            <div class="progress"><div class="progress-bar" style="width: 40%">40%</div></div>
-          </div>
-        </div>
-
-        <div class="card" data-categoria="moba">
-          <div class="card-body">
-            <h3>🏆 League of Legends</h3>
-            <p class="text-muted">MOBA | PC | Rango máximo: Master</p>
-            <div class="progress"><div class="progress-bar" style="width: 85%">85%</div></div>
-          </div>
-        </div>
-
-        <div class="card" data-categoria="moba">
-          <div class="card-body">
-            <h3>📱 Mobile Legends</h3>
-            <p class="text-muted">MOBA | Celular | Rango máximo: Mítico (40 estrellas)</p>
-            <div class="progress"><div class="progress-bar" style="width: 80%">80%</div></div>
-          </div>
-        </div>
-
-        <div class="card" data-categoria="sandbox">
-          <div class="card-body">
-            <h3>⛏️ Minecraft</h3>
-            <p class="text-muted">Sandbox | Nivel: Bueno</p>
-            <div class="progress"><div class="progress-bar" style="width: 65%">65%</div></div>
+          <h3>Canciones favoritas</h3>
+          <div class="row">
+            <div class="col-6 col-md-3 mb-3">
+              <a class="cancion card h-100" href="https://www.youtube.com/watch?v=q5xl4Zip1fQ" target="_blank" rel="noopener">
+                <img src="img/Ardilla.jpg" class="card-img-top" alt="Portada de California">
+                <div class="card-body"><h4>California</h4><p class="text-muted">Los Vaguens</p></div>
+              </a>
+            </div>
+            <div class="col-6 col-md-3 mb-3">
+              <a class="cancion card h-100" href="https://www.youtube.com/watch?v=IpVUNNaZLHw&list=RDIpVUNNaZLHw&start_radio=1" target="_blank" rel="noopener">
+                <img src="img/lilpeep.jpg" class="card-img-top" alt="Portada de Last Fall">
+                <div class="card-body"><h4>Last Fall</h4><p class="text-muted">Horse Head, Lil Peep &amp; Lil Tracy</p></div>
+              </a>
+            </div>
+            <div class="col-6 col-md-3 mb-3">
+              <a class="cancion card h-100" href="https://www.youtube.com/watch?v=icXUkIfZxyg" target="_blank" rel="noopener">
+                <img src="img/kingforaday.jpg" class="card-img-top" alt="Portada de King for a Day">
+                <div class="card-body"><h4>King for a Day</h4><p class="text-muted">Pierce The Veil ft. Kellin Quinn</p></div>
+              </a>
+            </div>
+            <div class="col-6 col-md-3 mb-3">
+              <a class="cancion card h-100" href="https://www.youtube.com/watch?v=Tk9TM7-eTmw" target="_blank" rel="noopener">
+                <img src="img/joseph.jpg" class="card-img-top" alt="Portada de Joseph">
+                <div class="card-body"><h4>Joseph</h4><p class="text-muted">Falling In Reverse (feat. Corey Taylor and Serj Tankian)</p></div>
+              </a>
+            </div>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- ========== CONTACTO ========== -->
-    <section id="pg-contacto" class="pagina">
-      <div class="caja">
-        <h2>Contacto</h2>
-
-        <form id="contactForm" class="form-contacto" novalidate>
-
-          <div class="campo">
-            <label for="nombre" class="etiqueta">Nombre completo</label>
-            <input type="text" id="nombre" class="form-control" placeholder="Ej: Juan Pérez">
-            <div class="error-msg" id="err-nombre"></div>
+    <!-- ===== REDES ===== -->
+    <section id="v-redes" class="vista">
+      <div class="contenedor">
+        <div class="caja text-center">
+          <h2 class="centrado">Sígueme en mis redes</h2>
+          <div class="redes-grid">
+            <a class="red" href="https://www.instagram.com/jfjahdkasfkj?xtok=MWFzejZ3anJpMXdxeQ==" target="_blank" rel="noopener">📸 Instagram</a>
+            <a class="red" href="https://github.com/DennisCarvajal69" target="_blank" rel="noopener">🐙 GitHub</a>
+            <a class="red" href="https://www.facebook.com/share/1A5YcfnNdr/" target="_blank" rel="noopener">👥 Facebook</a>
           </div>
-
-          <div class="campo">
-            <label for="correo" class="etiqueta">Correo electrónico</label>
-            <input type="email" id="correo" class="form-control" placeholder="correo@ejemplo.com">
-            <div class="error-msg" id="err-correo"></div>
-          </div>
-
-          <div class="campo">
-            <label for="telefono" class="etiqueta">Teléfono / Celular</label>
-            <input type="tel" id="telefono" class="form-control" inputmode="numeric" maxlength="8" placeholder="Ej: 71234567">
-            <div class="error-msg" id="err-telefono"></div>
-          </div>
-
-          <div class="campo">
-            <label for="motivo" class="etiqueta">Motivo del contacto</label>
-            <select id="motivo" class="form-select">
-              <option value="">-- Selecciona un motivo --</option>
-              <option>Consulta</option>
-              <option>Proyecto o trabajo</option>
-              <option>Colaboración</option>
-              <option>Otro</option>
-            </select>
-            <div class="error-msg" id="err-motivo"></div>
-          </div>
-
-          <div class="campo campo-full">
-            <label for="mensaje" class="etiqueta">Mensaje</label>
-            <textarea id="mensaje" class="form-control" rows="3" placeholder="Escribe tu mensaje"></textarea>
-            <div class="error-msg" id="err-mensaje"></div>
-          </div>
-
-          <div class="campo campo-full">
-            <label for="sugerencia" class="etiqueta">Sugerencia (opcional) <span id="contador" class="contador">0/200</span></label>
-            <textarea id="sugerencia" class="form-control" rows="2" maxlength="200" placeholder="¿Algo que pueda mejorar de esta página?"></textarea>
-            <div class="error-msg" id="err-sugerencia"></div>
-          </div>
-
-          <div class="campo campo-full">
-            <button type="submit" class="btn-filtro">Enviar mensaje</button>
-          </div>
-        </form>
-
-        <div id="alertaBox" class="mt-3" style="display:none;"></div>
+          <p class="text-muted mt-4 mb-0">© 2026 Denilson Carvajal. Todos los derechos reservados.</p>
+        </div>
       </div>
     </section>
 
   </main>
 
-  <footer class="text-center">
-    <p>Sígueme en mis redes</p>
-    <a href="https://www.instagram.com/jfjahdkasfkj?xtok=MWFzejZ3anJpMXdxeQ==" target="_blank">Instagram</a>
-    <a href="https://github.com/DennisCarvajal69" target="_blank">GitHub</a>
-    <a href="https://www.facebook.com/share/1A5YcfnNdr/" target="_blank">Facebook</a>
-    <p class="mt-3">© 2026 Denilson Carvajal. Todos los derechos reservados.</p>
-  </footer>
+  <!-- ========== MENÚ INFERIOR ========== -->
+  <nav class="bottom-nav" data-modulo="navegacion" data-cuando="carga" data-hidratado="false">
+    <a href="#inicio"   class="nav-item" data-pagina="inicio"><span class="ico">🏠</span><span>Inicio</span></a>
+    <a href="#sobre-mi" class="nav-item" data-pagina="sobre-mi"><span class="ico">👤</span><span>Perfil</span></a>
+    <a href="#horario"  class="nav-item" data-pagina="horario"><span class="ico">📅</span><span>Horario</span></a>
+    <a href="#musica"   class="nav-item" data-pagina="musica"><span class="ico">🎵</span><span>Música</span></a>
+    <a href="#redes"    class="nav-item" data-pagina="redes"><span class="ico">🔗</span><span>Redes</span></a>
+  </nav>
 
 </div>
 
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<!-- ================= VENTANAS FLOTANTES ================= -->
+
+<!-- GUSTOS -->
+<div class="modal-app" id="m-gustos" data-modulo="modal" data-cuando="modal" data-hidratado="false">
+  <div class="ventana">
+    <div class="v-head"><h3>❤️ GUSTOS</h3><button class="v-x" data-cerrar aria-label="Cerrar">✕</button></div>
+    <div class="v-body">
+      <div class="card mb-3"><div class="card-body">
+        <h4>Pasatiempos <small class="text-muted">· No productivo</small></h4>
+        <ul class="mb-0">
+          <li>Ver series y anime</li>
+          <li>Salir con amigos</li>
+          <li>Caminar sin rumbo</li>
+          <li>Dormir siestas</li>
+          <li>Ver videos en YouTube</li>
+        </ul>
+      </div></div>
+      <div class="card"><div class="card-body">
+        <h4>Intereses <small class="text-muted">· Productivo</small></h4>
+        <ul class="mb-0">
+          <li>Desarrollo web</li>
+          <li>Ir al Gym</li>
+          <li>Bases de datos</li>
+          <li>Aprender Ingles</li>
+        </ul>
+      </div></div>
+    </div>
+    <div class="v-foot"><button class="btn-cerrar" data-cerrar>Cerrar</button></div>
+  </div>
+</div>
+
+<!-- PROYECTOS -->
+<div class="modal-app" id="m-proyectos" data-modulo="modal" data-cuando="modal" data-hidratado="false">
+  <div class="ventana">
+    <div class="v-head"><h3>💻 MIS PROYECTOS</h3><button class="v-x" data-cerrar aria-label="Cerrar">✕</button></div>
+    <div class="v-body">
+      <div class="card mb-3"><div class="card-body">
+        <h4>Registro de estudiantes</h4>
+        <p class="mb-0">Sistema completo con PHP, MySQL y Bootstrap, hecho con XAMPP.</p>
+      </div></div>
+      <div class="card mb-3"><div class="card-body">
+        <h4>Ventas de pasteleria</h4>
+        <p class="mb-0">Sistema con ASP.NET MVC, Entity Framework y MySQL.</p>
+      </div></div>
+      <div class="card"><div class="card-body">
+        <h4>Proyecto Personal</h4>
+        <p class="mb-0">Proyecto de desarrollo web personal. (El actual)</p>
+      </div></div>
+    </div>
+    <div class="v-foot"><button class="btn-cerrar" data-cerrar>Cerrar</button></div>
+  </div>
+</div>
+
+<!-- JUEGOS -->
+<div class="modal-app" id="m-juegos" data-modulo="modal" data-cuando="modal" data-hidratado="false">
+  <div class="ventana">
+    <div class="v-head"><h3>🎮 JUEGOS FAVORITOS</h3><button class="v-x" data-cerrar aria-label="Cerrar">✕</button></div>
+    <div class="v-body" id="juegos">
+      <div class="filtros">
+        <button class="btn-filtro" data-filtro="todos"   data-modulo="filtro-juego" data-cuando="modal" data-hidratado="false">Todos</button>
+        <button class="btn-filtro" data-filtro="shooter" data-modulo="filtro-juego" data-cuando="modal" data-hidratado="false">Shooters</button>
+        <button class="btn-filtro" data-filtro="rpg"     data-modulo="filtro-juego" data-cuando="modal" data-hidratado="false">RPG</button>
+        <button class="btn-filtro" data-filtro="moba"    data-modulo="filtro-juego" data-cuando="modal" data-hidratado="false">MOBA</button>
+        <button class="btn-filtro" data-filtro="sandbox" data-modulo="filtro-juego" data-cuando="modal" data-hidratado="false">Sandbox</button>
+      </div>
+
+      <div class="card" data-categoria="shooter"><div class="card-body">
+        <h4>🎮 Counter-Strike 2</h4>
+        <p class="text-muted">Shooter | PC | Rango: Diamante</p>
+        <div class="progress"><div class="progress-bar" style="width: 85%">85%</div></div>
+      </div></div>
+
+      <div class="card" data-categoria="rpg"><div class="card-body">
+        <h4>⚔️ The Witcher 3</h4>
+        <p class="text-muted">RPG | PC | Nivel 40</p>
+        <div class="progress"><div class="progress-bar" style="width: 60%">60%</div></div>
+      </div></div>
+
+      <div class="card" data-categoria="shooter"><div class="card-body">
+        <h4>🎯 Valorant</h4>
+        <p class="text-muted">Shooter | PC | Rango: Oro</p>
+        <div class="progress"><div class="progress-bar" style="width: 40%">40%</div></div>
+      </div></div>
+
+      <div class="card" data-categoria="moba"><div class="card-body">
+        <h4>🏆 League of Legends</h4>
+        <p class="text-muted">MOBA | PC | Rango máximo: Master</p>
+        <div class="progress"><div class="progress-bar" style="width: 85%">85%</div></div>
+      </div></div>
+
+      <div class="card" data-categoria="moba"><div class="card-body">
+        <h4>📱 Mobile Legends</h4>
+        <p class="text-muted">MOBA | Celular | Rango máximo: Mítico (40 estrellas)</p>
+        <div class="progress"><div class="progress-bar" style="width: 80%">80%</div></div>
+      </div></div>
+
+      <div class="card" data-categoria="sandbox"><div class="card-body">
+        <h4>⛏️ Minecraft</h4>
+        <p class="text-muted">Sandbox | Nivel: Bueno</p>
+        <div class="progress"><div class="progress-bar" style="width: 65%">65%</div></div>
+      </div></div>
+    </div>
+    <div class="v-foot"><button class="btn-cerrar" data-cerrar>Cerrar</button></div>
+  </div>
+</div>
+
+<!-- CONTACTO -->
+<div class="modal-app" id="m-contacto" data-modulo="modal" data-cuando="modal" data-hidratado="false">
+  <div class="ventana">
+    <div class="v-head"><h3>✈️ CONTACTO</h3><button class="v-x" data-cerrar aria-label="Cerrar">✕</button></div>
+    <div class="v-body">
+      <form id="contactForm" class="form-contacto" novalidate
+            data-modulo="formulario" data-cuando="modal" data-hidratado="false">
+
+        <div class="campo">
+          <label for="nombre" class="etiqueta">Nombre completo</label>
+          <input type="text" id="nombre" class="form-control" placeholder="Ej: Juan Pérez">
+          <div class="error-msg" id="err-nombre"></div>
+        </div>
+
+        <div class="campo">
+          <label for="correo" class="etiqueta">Correo electrónico</label>
+          <input type="email" id="correo" class="form-control" placeholder="correo@ejemplo.com">
+          <div class="error-msg" id="err-correo"></div>
+        </div>
+
+        <div class="campo">
+          <label for="telefono" class="etiqueta">Teléfono / Celular</label>
+          <input type="tel" id="telefono" class="form-control" inputmode="numeric" maxlength="8" placeholder="Ej: 71234567">
+          <div class="error-msg" id="err-telefono"></div>
+        </div>
+
+        <div class="campo">
+          <label for="motivo" class="etiqueta">Motivo del contacto</label>
+          <select id="motivo" class="form-select">
+            <option value="">-- Selecciona un motivo --</option>
+            <option>Consulta</option>
+            <option>Proyecto o trabajo</option>
+            <option>Colaboración</option>
+            <option>Otro</option>
+          </select>
+          <div class="error-msg" id="err-motivo"></div>
+        </div>
+
+        <div class="campo campo-full">
+          <label for="mensaje" class="etiqueta">Mensaje</label>
+          <textarea id="mensaje" class="form-control" rows="3" placeholder="Escribe tu mensaje"></textarea>
+          <div class="error-msg" id="err-mensaje"></div>
+        </div>
+
+        <div class="campo campo-full">
+          <label for="sugerencia" class="etiqueta">Sugerencia (opcional) <span id="contador" class="contador">0/200</span></label>
+          <textarea id="sugerencia" class="form-control" rows="2" maxlength="200" placeholder="¿Algo que pueda mejorar de esta página?"></textarea>
+          <div class="error-msg" id="err-sugerencia"></div>
+        </div>
+
+        <div class="campo campo-full">
+          <button type="submit" class="btn-enviar">Enviar mensaje</button>
+        </div>
+      </form>
+      <div id="alertaBox" class="mt-3" style="display:none;"></div>
+    </div>
+    <div class="v-foot"><button class="btn-cerrar" data-cerrar>Cerrar</button></div>
+  </div>
+</div>
+
+<!-- INSTALAR (instrucciones para iPhone/iPad) -->
+<div class="modal-app" id="m-instalar" data-modulo="modal" data-cuando="modal" data-hidratado="false">
+  <div class="ventana">
+    <div class="v-head"><h3>⬇️ INSTALAR APP</h3><button class="v-x" data-cerrar aria-label="Cerrar">✕</button></div>
+    <div class="v-body">
+      <p>En iPhone o iPad (Safari):</p>
+      <ol>
+        <li>Toca el botón <b>Compartir</b> (el cuadro con una flecha hacia arriba).</li>
+        <li>Elige <b>Añadir a pantalla de inicio</b>.</li>
+        <li>Toca <b>Añadir</b>.</li>
+      </ol>
+    </div>
+    <div class="v-foot"><button class="btn-cerrar" data-cerrar>Cerrar</button></div>
+  </div>
+</div>
+
+<!-- Avisos de hidratación -->
+<div id="toastHid" class="toast-hid" aria-live="polite"></div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 
 </body>
-
 </html>
